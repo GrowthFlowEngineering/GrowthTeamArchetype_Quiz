@@ -1,7 +1,6 @@
 // Growth Team Archetype Quiz - React Component
 
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { useState } from "react";
 
 // TypeScript type declarations
 type ArchetypeKey =
@@ -37,7 +36,7 @@ const quizData: {
     question: "How often does your team collaborate across skills?",
     options: [
       { text: "Rarely 🧱", archetype: "silo-fortress" },
-      { text: "Only when forced 🧱", archetype: "silo-fortress" },
+      { text: "Only when forced 🧙‍♂️", archetype: "founder-mage" }, // shifted to a different archetype
       { text: "Weekly with some structure 🔁", archetype: "ritual-ready" },
       { text: "Constantly, with role clarity 🎯", archetype: "flow-aligned" },
     ],
