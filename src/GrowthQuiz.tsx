@@ -1,6 +1,6 @@
 // Growth Team Archetype Quiz - React Component
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 // TypeScript type declarations
@@ -108,6 +108,28 @@ export default function GrowthQuiz() {
   const [scores, setScores] = useState<Record<string, number>>({});
   const [showResult, setShowResult] = useState(false);
 
+  useEffect(() => {
+    const scroll = document.querySelector("html");
+    scroll?.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentQ, showResult]);
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX";
+    script.async = true;
+    document.head.appendChild(script);
+    // @ts-ignore
+    window.dataLayer = window.dataLayer || [];
+    function gtag(...args: any[]) {
+      // @ts-ignore
+      window.dataLayer.push(args);
+    }
+    // @ts-ignore
+    window.gtag = gtag;
+    gtag("js", new Date());
+    gtag("config", "G-XXXXXXXXXX");
+  }, []);
+
   const handleAnswer = (archetype: ArchetypeKey) => {
     playClickSound();
     setScores((prev) => ({
@@ -134,10 +156,34 @@ export default function GrowthQuiz() {
   };
 
   const Background = () => (
-    <div
-      className="fixed inset-0 z-[-1] opacity-5 bg-no-repeat bg-center bg-contain"
-      style={{ backgroundImage: "url('/logo-watermark.png')" }}
-    ></div>
+    <>
+      <meta
+        name="title"
+        content="Growth Team Archetype Quiz | GrowthFlowEngineering"
+      />
+      <meta
+        name="description"
+        content="Discover what kind of team you’re running — from the 🧙‍♂️ Founder-Mage to the 🎯 Flow-Aligned Org."
+      />
+      <meta property="og:title" content="Growth Team Archetype Quiz" />
+      <meta
+        property="og:description"
+        content="Take this 60-second quiz and find out your team’s real operating mode."
+      />
+      <meta
+        property="og:image"
+        content="https://www.growthflowengineering.com/assets/quiz-preview.png"
+      />
+      <meta
+        property="og:url"
+        content="https://www.growthflowengineering.com/quiz"
+      />
+      <meta name="twitter:card" content="summary_large_image" />
+      <div
+        className="fixed inset-0 z-[-1] opacity-5 bg-no-repeat bg-center bg-contain"
+        style={{ backgroundImage: "url('/logo-watermark.png')" }}
+      ></div>
+    </>
   );
 
   if (showResult) {
